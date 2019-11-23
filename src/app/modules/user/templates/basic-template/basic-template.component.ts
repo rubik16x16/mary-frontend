@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basic-template',
@@ -9,14 +11,23 @@ export class BasicTemplateComponent implements OnInit {
 
   sideBarOpened:boolean = false;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-  }
+  }// end ngOnInit
 
-  toggleSideBar(){
+  toggleSideBar() {
 
     this.sideBarOpened = !this.sideBarOpened;
     console.log(this.sideBarOpened);
-  }
+  }// end toggleSideBar
+
+  logOut() {
+
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+  }// end logOut
 }

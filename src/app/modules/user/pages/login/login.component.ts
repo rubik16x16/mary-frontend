@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,20 +10,38 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  error: string = null;
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  login(){
+  login() {
 
-    console.log('loging');
+    let loginForm = this.loginForm;
+
+    if (loginForm.valid){
+
+      this.authService.login(loginForm.value).subscribe((res) => {
+
+        if (res.status == 200) {
+
+          localStorage.setItem('token', JSON.stringify(res.body));
+          this.router.navigate(['/dashboard']);
+        } else {
+
+          this.error = res.error.detail;
+        }
+      });
+    }
   }
 }

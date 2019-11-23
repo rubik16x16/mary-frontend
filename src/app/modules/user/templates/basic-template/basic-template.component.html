@@ -1,7 +1,11 @@
 <mat-drawer-container class="container">
   <mat-drawer mode="side" [(opened)] = "sideBarOpened">Side menu</mat-drawer>
   <mat-drawer-content>
-    <mat-toolbar>My App</mat-toolbar>
+    <mat-toolbar fxLayout="row">
+      <span>My App</span>
+      <span fxFlex></span>
+      <button mat-button color="primary" (click)="logOut()">Logout</button>
+    </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

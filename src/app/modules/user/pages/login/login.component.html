@@ -14,8 +14,9 @@
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
+        <span class="error" *ngIf="error != null">{{ error }}</span>
         <mat-form-field fxFlex class="example-full-width">
-          <input matInput placeholder="Password" formControlName="password">
+          <input type="password" matInput placeholder="Password" formControlName="password">
           <mat-error *ngIf="loginForm.controls.password.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
@@ -23,7 +24,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button type="submit" mat-raised-button color="primary">Login</button>
+      <button type="submit" form="login-form" mat-raised-button color="primary">Login</button>
     </mat-card-actions>
   </mat-card>
 </div>

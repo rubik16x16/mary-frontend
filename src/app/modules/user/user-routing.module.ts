@@ -5,6 +5,9 @@ import { BasicTemplateComponent as BasicTemplate } from './templates/basic-templ
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
+import { GuestGuard } from './guards/guest.guard';
+import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
 
 const routes: Routes = [
   {
@@ -17,7 +20,8 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [GuestGuard]
       },
       {
         path: 'register',
@@ -25,7 +29,13 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'transacciones',
+        component: TransaccionesComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

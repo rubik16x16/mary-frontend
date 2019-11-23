@@ -9,11 +9,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
 
 @NgModule({
   declarations: [
     IndexComponent, BasicTemplateComponent,
-    LoginComponent, RegisterComponent, DashboardComponent
+    LoginComponent, RegisterComponent, DashboardComponent,
+    TransaccionesComponent
   ],
   imports: [
     CommonModule,
