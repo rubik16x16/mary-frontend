@@ -4,7 +4,7 @@
     <mat-toolbar fxLayout="row">
       <span>My App</span>
       <span fxFlex></span>
-      <button mat-button color="primary" (click)="logOut()">Logout</button>
+      <button *ngIf="isLogin()" mat-button color="primary" (click)="logOut()">Logout</button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-drawer-content>

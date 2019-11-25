@@ -10,6 +10,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
+import { GlobalModule } from 'src/app/global.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TransaccionesComponent } from './pages/transacciones/transacciones.comp
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    GlobalModule
   ]
 })
 

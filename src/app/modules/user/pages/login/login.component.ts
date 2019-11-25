@@ -35,7 +35,13 @@ export class LoginComponent implements OnInit {
 
         if (res.status == 200) {
 
-          localStorage.setItem('token', JSON.stringify(res.body));
+          let token = {
+            access: res.body.access,
+            refresh: res.body.refresh,
+          };
+
+          localStorage.setItem('token', JSON.stringify(token));
+          localStorage.setItem('user', JSON.stringify(res.body.user));
           this.router.navigate(['/dashboard']);
         } else {
 

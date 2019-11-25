@@ -23,17 +23,18 @@ export class AuthService {
 
   logOut(): void {
 
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
   }// end logOut
 
   isLogin(): boolean {
 
-    return localStorage.getItem('user') != null;
+    return localStorage.getItem('token') != null;
   }// end isLogin
 
   getToken(): any {
 
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('token'));
   }// end getToken
 
   private handleError<T>() {
@@ -43,4 +44,20 @@ export class AuthService {
       return of(error as T);
     };
   }// end handleError
+
+  getUserPermissions(): string[] {
+
+    let user = JSON.parse(localStorage.getItem('user'));
+    let permissions = [];
+
+    user.permissions.forEach(permission => {
+
+      permission = permission.split('|');
+      let strPermision = permission[0].substring(0, permission[0].length - 1) + '.' + permission[2].trim();
+      strPermision = strPermision.split(' ').join('-');
+      permissions.push(strPermision.toLowerCase());
+    });
+
+    return permissions;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-transacciones',
@@ -9,7 +10,8 @@ import { HttpClient } from '@angular/common/http';
 export class TransaccionesComponent implements OnInit {
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -18,6 +20,8 @@ export class TransaccionesComponent implements OnInit {
 
       console.log(res);
     });
+
+    console.log(this.authService.getUserPermissions());
   }
 
 }

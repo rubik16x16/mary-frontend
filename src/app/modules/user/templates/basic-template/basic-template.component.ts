@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class BasicTemplateComponent implements OnInit {
 
-  sideBarOpened:boolean = false;
+  sideBarOpened: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -30,4 +30,9 @@ export class BasicTemplateComponent implements OnInit {
     this.authService.logOut();
     this.router.navigate(['/login']);
   }// end logOut
+
+  isLogin() {
+
+    return this.authService.isLogin();
+  }
 }
