@@ -10,6 +10,36 @@ import { Router } from '@angular/router';
 export class BasicTemplateComponent implements OnInit {
 
   sideBarOpened: boolean = false;
+  config = {
+    paddingAtStart: true,
+    interfaceWithRoute: true,
+    classname: 'my-custom-class',
+    listBackgroundColor: `rgb(208, 241, 239)`,
+    fontColor: `rgb(8, 54, 71)`,
+    backgroundColor: `rgb(208, 241, 239)`,
+    selectedListFontColor: `red`,
+    highlightOnSelect: true,
+    collapseOnSelect: true,
+    rtlLayout: false
+  };
+
+  appitems = [
+    {
+      label: 'Mary',
+      imageIcon: 'favicon.ico',
+      link: '/dashboard',
+    },
+    {
+      label: 'Transacciones',
+      icon: 'alarm',
+      link: '/transacciones'
+    },
+    {
+      label: 'Perfil',
+      icon: 'alarm',
+      link: '/perfil'
+    }
+  ];
 
   constructor(
     private authService: AuthService,
@@ -17,22 +47,28 @@ export class BasicTemplateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  }// end ngOnInit
+  }
 
   toggleSideBar() {
 
     this.sideBarOpened = !this.sideBarOpened;
-    console.log(this.sideBarOpened);
-  }// end toggleSideBar
+  }
 
   logOut() {
 
     this.authService.logOut();
     this.router.navigate(['/login']);
-  }// end logOut
+  }
 
   isLogin() {
 
     return this.authService.isLogin();
   }
+
+  selectedItem(item: any) {
+
+    this.sideBarOpened = false;
+  }
+
+  selectedLabel(label: any) { }
 }

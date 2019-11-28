@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
 import { GlobalModule } from 'src/app/global.module';
+import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GlobalModule } from 'src/app/global.module';
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
-    GlobalModule
+    GlobalModule,
+    NgMaterialMultilevelMenuModule
   ]
 })
 

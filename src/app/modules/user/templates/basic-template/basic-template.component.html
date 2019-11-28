@@ -1,11 +1,21 @@
 <mat-drawer-container class="container">
-  <mat-drawer mode="side" [(opened)] = "sideBarOpened">Side menu</mat-drawer>
+  <mat-drawer class="side-bar" mode="push" [(opened)] = "sideBarOpened">
+    <ng-material-multilevel-menu
+      [configuration]='config'
+      [items]='appitems'
+      (selectedItem)="selectedItem($event)"
+      (selectedLabel)="selectedLabel($event)">
+    </ng-material-multilevel-menu>
+  </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar fxLayout="row">
       <span>My App</span>
+      <mat-icon class="btn-toggle-menu" aria-hidden="false" aria-label="menu" (click)="toggleSideBar()">menu</mat-icon>
       <span fxFlex></span>
       <button *ngIf="isLogin()" mat-button color="primary" (click)="logOut()">Logout</button>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
