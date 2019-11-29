@@ -1,19 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from 'src/app/services/auth.service';
-
-const ELEMENT_DATA: any[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { TransaccionService } from 'src/app/services/transaccion.service';
+import { Transaccion } from 'src/app/models/Transaccion';
 
 @Component({
   selector: 'app-transacciones',
@@ -22,22 +9,19 @@ const ELEMENT_DATA: any[] = [
 })
 export class TransaccionesComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['indice', 'descripcion', 'monto'];
+  transacciones: Transaccion[];
 
   constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
+    private transaccionService: TransaccionService
   ) { }
 
   ngOnInit() {
 
-    this.httpClient.get('http://127.0.0.1:8000/transacciones').subscribe(res => {
+    this.transaccionService.all().subscribe(res => {
 
-      console.log(res);
+      this.transacciones = res;
     });
-
-    console.log(this.authService.getUserPermissions());
   }
 
 }
