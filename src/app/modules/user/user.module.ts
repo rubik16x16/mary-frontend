@@ -12,12 +12,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
 import { GlobalModule } from 'src/app/global.module';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
+import { CreateComponent as TransaccionCreateModal } from './pages/transacciones/create/create.component';
 
 @NgModule({
   declarations: [
     IndexComponent, BasicTemplateComponent,
     LoginComponent, RegisterComponent, DashboardComponent,
-    TransaccionesComponent
+    TransaccionesComponent, TransaccionCreateModal
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,10 @@ import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
     MaterialModule,
     FlexLayoutModule,
     GlobalModule,
-    NgMaterialMultilevelMenuModule
+    NgMaterialMultilevelMenuModule,
+  ],
+  entryComponents: [
+    TransaccionCreateModal
   ]
 })
 

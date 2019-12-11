@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { TransaccionService } from 'src/app/services/transaccion.service';
 import { Transaccion } from 'src/app/models/Transaccion';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateComponent } from './create/create.component';
 
 @Component({
   selector: 'app-transacciones',
@@ -13,7 +15,8 @@ export class TransaccionesComponent implements OnInit {
   transacciones: Transaccion[];
 
   constructor(
-    private transaccionService: TransaccionService
+    private transaccionService: TransaccionService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -24,4 +27,10 @@ export class TransaccionesComponent implements OnInit {
     });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateComponent, {
+      width: '500px',
+      data: {name: 'test', animal: 'test2'}
+    });
+  }
 }
