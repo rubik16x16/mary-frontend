@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+var path = require('path');
 
 module.exports = function (config) {
   config.set({
@@ -8,6 +9,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -25,11 +27,21 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['FirefoxWithMyExtension'],
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
+      },
+      FirefoxWithMyExtension: {
+        base: 'Firefox',
+        prefs: {
+          'devtools.theme': 'dark',
+          'devtools.toolbox.host': 'right'
+        },
+        extensions: [
+          path.resolve(__dirname, 'helpers/extensions/addon@darkreader.org.xpi'),
+        ]
       }
     },
     singleRun: false,

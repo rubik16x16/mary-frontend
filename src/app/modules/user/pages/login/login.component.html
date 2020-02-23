@@ -1,4 +1,4 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center">
   <mat-card fxFlex="30%">
     <mat-card-header>
       <mat-card-title>Login</mat-card-title>
@@ -24,7 +24,11 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button type="submit" form="login-form" mat-raised-button color="primary">Login</button>
+      <button
+        fxFlex type="submit" [disabled]="isLogging"
+        form="login-form" mat-raised-button color="primary">Login
+        <mat-spinner class="login-spinner" [class.active]="isLogging" color="accent" [diameter]=20></mat-spinner>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private loginRoute = 'http://127.0.0.1:8000/api/token/';
+  public static LOGIN_API_URL = 'http://127.0.0.1:8000/api/token/';
 
   constructor(
     private httpClient: HttpClient
@@ -16,7 +16,7 @@ export class AuthService {
 
   login(credenciales: any): Observable<any> {
 
-    return this.httpClient.post(this.loginRoute, credenciales, {observe: 'response'}).pipe(
+    return this.httpClient.post(AuthService.LOGIN_API_URL, credenciales, {observe: 'response'}).pipe(
       catchError(this.handleError<any>())
     );
   }// end login

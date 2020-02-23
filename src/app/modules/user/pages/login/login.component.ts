@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required]
   });
 
+  isLogging: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -29,8 +31,9 @@ export class LoginComponent implements OnInit {
 
     let loginForm = this.loginForm;
 
-    if (loginForm.valid){
+    if(loginForm.valid && this.isLogging != true){
 
+      this.isLogging = true;
       this.authService.login(loginForm.value).subscribe((res) => {
 
         if (res.status == 200) {
@@ -47,6 +50,8 @@ export class LoginComponent implements OnInit {
 
           this.error = res.error.detail;
         }
+
+        this.isLogging = false;
       });
     }
   }

@@ -27,17 +27,17 @@ export class BasicTemplateComponent implements OnInit {
     {
       label: 'Mary',
       imageIcon: 'favicon.ico',
-      link: '/dashboard',
+      url: '/dashboard',
     },
     {
       label: 'Transacciones',
       icon: 'alarm',
-      link: '/transacciones'
+      url: '/transacciones'
     },
     {
       label: 'Perfil',
       icon: 'alarm',
-      link: '/perfil'
+      url: '/perfil'
     }
   ];
 
@@ -67,8 +67,11 @@ export class BasicTemplateComponent implements OnInit {
 
   selectedItem(item: any) {
 
+    this.router.navigate([item.url]);
     this.sideBarOpened = false;
   }
 
-  selectedLabel(label: any) { }
+  selectedLabel(label: any) {
+
+  }
 }
