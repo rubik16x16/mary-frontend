@@ -9,10 +9,17 @@
   </mat-drawer>
   <mat-drawer-content>
     <mat-toolbar fxLayout="row">
-      <span>My App</span>
-      <mat-icon class="btn-toggle-menu" aria-hidden="false" aria-label="menu" (click)="toggleSideBar()">menu</mat-icon>
+      <a [routerLink]="['/']" routerLinkActive="link-active" >My App</a>
+      <div *ngIf="isLogin()" class="isLogin">
+        <mat-icon class="btn-toggle-menu" aria-hidden="false" aria-label="menu" (click)="toggleSideBar()">menu</mat-icon>
+      </div>
       <span fxFlex></span>
-      <button *ngIf="isLogin()" mat-button color="primary" (click)="logOut()">Logout</button>
+      <div *ngIf="isLogin()" class="isLogin">
+        <a style="cursor: pointer;" (click)="logOut()">Logout</a>
+      </div>
+      <div *ngIf="!isLogin()">
+        <a [routerLink]="['/login']" routerLinkActive="link-active">Login</a>
+      </div>
     </mat-toolbar>
     <div class="content">
       <router-outlet></router-outlet>

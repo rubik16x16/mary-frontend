@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
+import { AccountsComponent } from './pages/accounts/accounts.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'accounts',
+        component: AccountsComponent,
         canActivate: [AuthGuard]
       },
       {

@@ -30,6 +30,11 @@ export class BasicTemplateComponent implements OnInit {
       url: '/dashboard',
     },
     {
+      label: 'Accounts',
+      icon: 'alarm',
+      url: '/accounts'
+    },
+    {
       label: 'Transacciones',
       icon: 'alarm',
       url: '/transacciones'

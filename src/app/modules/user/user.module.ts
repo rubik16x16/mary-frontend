@@ -13,12 +13,13 @@ import { TransaccionesComponent } from './pages/transacciones/transacciones.comp
 import { GlobalModule } from 'src/app/global.module';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { CreateComponent as TransaccionCreateModal } from './pages/transacciones/create/create.component';
+import { AccountsComponent } from './pages/accounts/accounts.component';
 
 @NgModule({
   declarations: [
     IndexComponent, BasicTemplateComponent,
     LoginComponent, RegisterComponent, DashboardComponent,
-    TransaccionesComponent, TransaccionCreateModal
+    TransaccionesComponent, TransaccionCreateModal, AccountsComponent
   ],
   imports: [
     CommonModule,
