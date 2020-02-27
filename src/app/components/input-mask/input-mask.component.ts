@@ -8,7 +8,7 @@ import Inputmask from 'inputmask';
 })
 export class InputMaskComponent implements AfterViewInit {
 
-  @ViewChild('input', {static: false}) input;
+  @ViewChild('input') input;
   @Input()  value: number;
   @Output() newValue = new EventEmitter<number>();
 
