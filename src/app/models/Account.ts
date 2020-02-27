@@ -6,7 +6,7 @@ export class Account extends Model {
   // tslint:disable-next-line: variable-name
   private _id: number;
   // tslint:disable-next-line: variable-name
-  private _user: Usuario;
+  private _user: string;
   // tslint:disable-next-line: variable-name
   private _amount: number;
   // tslint:disable-next-line: variable-name
@@ -32,12 +32,12 @@ export class Account extends Model {
     this._id = id;
   }
 
-  get user(): Usuario {
+  get user(): string {
 
     return this._user;
   }
 
-  set user(user: Usuario) {
+  set user(user: string) {
 
     this._user = user;
   }

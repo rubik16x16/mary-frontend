@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transaccion } from '../models/Transaccion';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransaccionService {
 
-  private url: string = 'http://127.0.0.1:8000/transacciones';
+  private url: string = `${environment.apiUrl}/transacciones`;
 
   constructor(
     private httpClient: HttpClient
