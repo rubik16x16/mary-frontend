@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "mary-frontend"
+  "defaultProject": "mary-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
