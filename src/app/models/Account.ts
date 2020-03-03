@@ -6,13 +6,15 @@ export class Account extends Model {
   // tslint:disable-next-line: variable-name
   private _id: number;
   // tslint:disable-next-line: variable-name
-  private _user: string;
+  private _name: string;
   // tslint:disable-next-line: variable-name
   private _amount: number;
   // tslint:disable-next-line: variable-name
+  private _user: string;
+  // tslint:disable-next-line: variable-name
   transactions: Transaccion[];
 
-  protected fillable = ['id', 'user', 'amount', 'transactions'];
+  protected fillable = ['id', 'name', 'amount', 'user', 'transactions'];
 
   constructor(
     object: any = {}
@@ -32,14 +34,14 @@ export class Account extends Model {
     this._id = id;
   }
 
-  get user(): string {
+  get name(): string {
 
-    return this._user;
+    return this._name;
   }
 
-  set user(user: string) {
+  set name(name: string) {
 
-    this._user = user;
+    this._name = name;
   }
 
   get amount(): number {
@@ -52,12 +54,23 @@ export class Account extends Model {
     this._amount = amount;
   }
 
+  get user(): string {
+
+    return this._user;
+  }
+
+  set user(user: string) {
+
+    this._user = user;
+  }
+
   toJSON(): any {
 
     return {
       id: this.id,
-      user: this.user,
+      name: this.name,
       amount: this.amount,
+      user: this.user,
       transactions: this.transactions
     };
   }

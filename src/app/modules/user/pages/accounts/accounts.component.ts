@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../../../../services/account.service';
+import { Account } from '../../../../models/Account';
+import { LoadBarService } from '../../../../services/load-bar.service';
 
 @Component({
   selector: 'app-accounts',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsComponent implements OnInit {
 
-  constructor() { }
+  accounts: Account[];
+  displayedColumns: string[] = [
+    'id', 'name', 'amount'
+  ];
+
+  loadBar: boolean;
+
+  constructor(
+    private accountService: AccountService,
+  ) { }
 
   ngOnInit() {
+
+    this.accountService.all().subscribe(res => {
+
+      this.accounts = res;
+      console.log(this.accounts);
+    });
   }
 
 }

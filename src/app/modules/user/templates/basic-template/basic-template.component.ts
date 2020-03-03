@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { LoadBarService } from '../../../../services/load-bar.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basic-template',
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 export class BasicTemplateComponent implements OnInit {
 
   sideBarOpened: boolean = false;
+  showLoadBar: boolean = false;
+
   config = {
     paddingAtStart: true,
     interfaceWithRoute: true,
@@ -48,10 +52,18 @@ export class BasicTemplateComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loadBarService: LoadBarService
   ) { }
 
   ngOnInit() {
+
+    this.loadBarService.loading$.pipe(
+      delay(0)
+    ).subscribe(res => {
+
+      this.showLoadBar = res;
+    });
   }
 
   toggleSideBar() {

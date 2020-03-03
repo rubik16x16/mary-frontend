@@ -22,6 +22,13 @@
 mat-progress-bar{
 
   position: absolute;
+  top: 0;
+  visibility: hidden;
+}
+
+.progress-bar-active{
+
+  visibility: visible;
 }
 
 a {

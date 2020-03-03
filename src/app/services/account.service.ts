@@ -10,7 +10,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class AccountService {
 
-  public static API_URL: string = `${environment.apiUrl}/transacciones`;
+  public static API_URL: string = `${environment.apiUrl}/user/accounts`;
 
   constructor(
     private httpClient: HttpClient

@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { LoadBarInterceptorService } from './services/load-bar-interceptor.service';
+import { LoadBarService } from './services/load-bar.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,11 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadBarInterceptorService,
       multi: true
     }
   ],

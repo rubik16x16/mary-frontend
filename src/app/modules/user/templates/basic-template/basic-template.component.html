@@ -8,6 +8,7 @@
     </ng-material-multilevel-menu>
   </mat-drawer>
   <mat-drawer-content>
+    <mat-progress-bar [class.progress-bar-active]="showLoadBar" mode="indeterminate"></mat-progress-bar>
     <mat-toolbar fxLayout="row">
       <a [routerLink]="['/']" routerLinkActive="link-active" >My App</a>
       <div *ngIf="isLogin()" class="isLogin">
