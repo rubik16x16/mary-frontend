@@ -1,33 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../../services/account.service';
 import { Account } from '../../../../models/Account';
-import { LoadBarService } from '../../../../services/load-bar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateModalComponent } from './create-modal/create-modal.component';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-accounts',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.scss']
+	selector: 'app-accounts',
+	templateUrl: './accounts.component.html',
+	styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
 
-  accounts: Account[];
-  displayedColumns: string[] = [
-    'id', 'name', 'amount'
-  ];
+	accounts: Account[];
+	dataSource: Account[];
+	displayedColumns: string[] = [
+		'id', 'name', 'amount', 'actions'
+	];
 
-  loadBar: boolean;
+	loadBar: boolean;
 
-  constructor(
-    private accountService: AccountService,
-  ) { }
+	constructor(
+		private accountService: AccountService,
+		public createModal: MatDialog,
+		public dialog: MatDialog
+	) { }
 
-  ngOnInit() {
+	ngOnInit() {
 
-    this.accountService.all().subscribe(res => {
+		this.accountService.all().subscribe(res => {
 
-      this.accounts = res;
-      console.log(this.accounts);
-    });
-  }
+			this.accounts = res;
+			this.dataSource = [...this.accounts];
+			console.log(this.accounts);
+		});
+	}
 
+	openDialog(): void {
+		const dialogRef = this.createModal.open(CreateModalComponent, {
+			width: '450px'
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+
+				this.accountService.create(new Account(result)).subscribe(res => {
+
+					this.accounts.push(res);
+					this.dataSource = [...this.accounts];
+				});
+			}
+		});
+	}
+
+	delete(account): void {
+
+		const dialogRef = this.dialog.open(DialogComponent, {
+			width: '250px',
+			data: {msg: `Surely you want to delete account ${account.name}`}
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+
+			if (result) {
+
+				let accountIndex = this.accounts.indexOf(account);
+				this.accountService.delete(account.id).subscribe(res => {
+
+					this.accounts.splice(accountIndex, 1);
+					this.dataSource = [...this.accounts];
+				});
+			}
+		});
+	}
 }

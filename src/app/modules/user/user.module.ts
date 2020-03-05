@@ -14,26 +14,29 @@ import { GlobalModule } from 'src/app/global.module';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { CreateComponent as TransaccionCreateModal } from './pages/transacciones/create/create.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
+import { CreateModalComponent as AccountCreateModalComponent } from './pages/accounts/create-modal/create-modal.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { EditModalComponent } from './pages/accounts/edit-modal/edit-modal.component';
 
 @NgModule({
-  declarations: [
-    IndexComponent, BasicTemplateComponent,
-    LoginComponent, RegisterComponent, DashboardComponent,
-    TransaccionesComponent, TransaccionCreateModal, AccountsComponent
-  ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    GlobalModule,
-    NgMaterialMultilevelMenuModule,
-  ],
-  entryComponents: [
-    TransaccionCreateModal
-  ]
+	declarations: [
+		IndexComponent, BasicTemplateComponent,
+		LoginComponent, RegisterComponent, DashboardComponent,
+		TransaccionesComponent, TransaccionCreateModal, AccountsComponent, AccountCreateModalComponent, DialogComponent, EditModalComponent
+	],
+	imports: [
+		CommonModule,
+		UserRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		MaterialModule,
+		FlexLayoutModule,
+		GlobalModule,
+		NgMaterialMultilevelMenuModule,
+	],
+	entryComponents: [
+		TransaccionCreateModal
+	]
 })
 
 export class UserModule { }

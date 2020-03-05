@@ -3,75 +3,62 @@ import { Transaccion } from './Transaccion';
 import { Model } from './Model';
 export class Account extends Model {
 
-  // tslint:disable-next-line: variable-name
-  private _id: number;
-  // tslint:disable-next-line: variable-name
-  private _name: string;
-  // tslint:disable-next-line: variable-name
-  private _amount: number;
-  // tslint:disable-next-line: variable-name
-  private _user: string;
-  // tslint:disable-next-line: variable-name
-  transactions: Transaccion[];
+	// tslint:disable-next-line: variable-name
+	private _id: number;
+	// tslint:disable-next-line: variable-name
+	private _name: string;
+	// tslint:disable-next-line: variable-name
+	private _amount: number;
+	// tslint:disable-next-line: variable-name
+	transactions: Transaccion[];
 
-  protected fillable = ['id', 'name', 'amount', 'user', 'transactions'];
+	protected fillable = ['id', 'name', 'amount', 'transactions'];
 
-  constructor(
-    object: any = {}
-  ) {
+	constructor(
+		object: any = {}
+	) {
 
-    super();
-    this.fill(object);
-  }
+		super();
+		this.fill(object);
+	}
 
-  get id(): number {
+	get id(): number {
 
-    return this._id;
-  }
+		return this._id;
+	}
 
-  set id(id: number) {
+	set id(id: number) {
 
-    this._id = id;
-  }
+		this._id = id;
+	}
 
-  get name(): string {
+	get name(): string {
 
-    return this._name;
-  }
+		return this._name;
+	}
 
-  set name(name: string) {
+	set name(name: string) {
 
-    this._name = name;
-  }
+		this._name = name;
+	}
 
-  get amount(): number {
+	get amount(): number {
 
-    return this._amount;
-  }
+		return this._amount;
+	}
 
-  set amount(amount: number) {
+	set amount(amount: number) {
 
-    this._amount = amount;
-  }
+		this._amount = amount;
+	}
 
-  get user(): string {
+	toJSON(): any {
 
-    return this._user;
-  }
-
-  set user(user: string) {
-
-    this._user = user;
-  }
-
-  toJSON(): any {
-
-    return {
-      id: this.id,
-      name: this.name,
-      amount: this.amount,
-      user: this.user,
-      transactions: this.transactions
-    };
-  }
+		return {
+			id: this.id,
+			name: this.name,
+			amount: this.amount,
+			transactions: this.transactions
+		};
+	}
 }

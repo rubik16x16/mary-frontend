@@ -11,6 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .table-responsive{
 
   overflow: auto;
+  margin-bottom: 20px;
 }
 
 .text-right{
@@ -26,4 +27,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-left{
 
   text-align: left;
+}
+
+.form-field{
+
+	margin-bottom: 10px;
 }
