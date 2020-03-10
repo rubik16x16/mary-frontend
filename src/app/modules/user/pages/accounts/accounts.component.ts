@@ -3,6 +3,7 @@ import { AccountService } from '../../../../services/account.service';
 import { Account } from '../../../../models/Account';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
@@ -23,6 +24,7 @@ export class AccountsComponent implements OnInit {
 	constructor(
 		private accountService: AccountService,
 		public createModal: MatDialog,
+		public editModal: MatDialog,
 		public dialog: MatDialog
 	) { }
 
@@ -36,7 +38,7 @@ export class AccountsComponent implements OnInit {
 		});
 	}
 
-	openDialog(): void {
+	openCreateModal(): void {
 		const dialogRef = this.createModal.open(CreateModalComponent, {
 			width: '450px'
 		});
@@ -68,6 +70,28 @@ export class AccountsComponent implements OnInit {
 				this.accountService.delete(account.id).subscribe(res => {
 
 					this.accounts.splice(accountIndex, 1);
+					this.dataSource = [...this.accounts];
+				});
+			}
+		});
+	}
+
+	edit(account): void {
+
+		const dialogRef = this.editModal.open(EditModalComponent, {
+			width: '450px',
+			data: {
+				account
+			}
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+
+				let accountIndex = this.accounts.indexOf(account);
+				this.accountService.update(account.id, result).subscribe(res => {
+
+					this.accounts.splice(accountIndex, 1, res);
 					this.dataSource = [...this.accounts];
 				});
 			}

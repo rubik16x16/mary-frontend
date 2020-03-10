@@ -36,7 +36,7 @@ export class AccountService {
 
 	create(account: Account): Observable<Account> {
 
-		return this.httpClient.post<Account[]>(AccountService.API_URL, account).
+		return this.httpClient.post<Account[]>(`${AccountService.API_URL}/`, account).
 		pipe(
 			map((data: any) => new Account(data))
 		);

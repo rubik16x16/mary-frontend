@@ -19,7 +19,7 @@
 		<ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let account" class="actions">
-				<button mat-raised-button color="accent">Edit</button>
+				<button (click)="edit(account)"  mat-raised-button color="accent">Edit</button>
 				<button (click)="delete(account)" mat-raised-button color="warn">Delete</button>
 			</td>
     </ng-container>
@@ -29,4 +29,4 @@
   </table>
 </div>
 
-<button mat-raised-button color="primary" (click)="openDialog()">Create</button>
+<button mat-raised-button color="primary" (click)="openCreateModal()">Create</button>

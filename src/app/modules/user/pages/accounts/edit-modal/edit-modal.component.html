@@ -8,7 +8,7 @@
 	</mat-form-field>
 	<div fxFlex class="form-field">
 		<label for="amount">Amount</label>
-		<app-input-mask id="amount" (changeVal)="changeAmount($event)"></app-input-mask>
+		<app-input-mask id="amount" [value]="data.account.amount" (changeVal)="changeAmount($event)"></app-input-mask>
 		<mat-error *ngIf="amount.errors.required">
 			Amount is <strong>required</strong>
 		</mat-error>
