@@ -52,6 +52,11 @@ export class Account extends Model {
 		this._amount = amount;
 	}
 
+	clone(): Account {
+
+		return new Account({...this.toJSON()});
+	}
+
 	toJSON(): any {
 
 		return {

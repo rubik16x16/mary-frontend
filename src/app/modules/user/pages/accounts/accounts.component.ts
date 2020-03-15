@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../../services/account.service';
 import { Account } from '../../../../models/Account';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -19,12 +19,12 @@ export class AccountsComponent implements OnInit {
 		'id', 'name', 'amount', 'actions'
 	];
 
+	dialogRef: MatDialogRef<any>;
+
 	loadBar: boolean;
 
 	constructor(
 		private accountService: AccountService,
-		public createModal: MatDialog,
-		public editModal: MatDialog,
 		public dialog: MatDialog
 	) { }
 
@@ -34,35 +34,39 @@ export class AccountsComponent implements OnInit {
 
 			this.accounts = res;
 			this.dataSource = [...this.accounts];
-			console.log(this.accounts);
 		});
 	}
 
 	openCreateModal(): void {
-		const dialogRef = this.createModal.open(CreateModalComponent, {
+		this.dialogRef = this.dialog.open(CreateModalComponent, {
 			width: '450px'
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
+		this.dialogRef.afterClosed().subscribe(result => {
 			if (result) {
 
-				this.accountService.create(new Account(result)).subscribe(res => {
-
-					this.accounts.push(res);
-					this.dataSource = [...this.accounts];
-				});
+				this.createNewAccount(result);
 			}
 		});
 	}
 
-	delete(account): void {
+	createNewAccount(data): void {
 
-		const dialogRef = this.dialog.open(DialogComponent, {
+		this.accountService.create(new Account(data)).subscribe(res => {
+
+			this.accounts.push(res);
+			this.dataSource = [...this.accounts];
+		});
+	}
+
+	delete(account: Account): void {
+
+		this.dialogRef = this.dialog.open(DialogComponent, {
 			width: '250px',
 			data: {msg: `Surely you want to delete account ${account.name}`}
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
+		this.dialogRef.afterClosed().subscribe(result => {
 
 			if (result) {
 
@@ -76,25 +80,30 @@ export class AccountsComponent implements OnInit {
 		});
 	}
 
-	edit(account): void {
+	openEditModal(account: Account): void {
 
-		const dialogRef = this.editModal.open(EditModalComponent, {
+		this.dialogRef = this.dialog.open(EditModalComponent, {
 			width: '450px',
 			data: {
 				account
 			}
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
+		this.dialogRef.afterClosed().subscribe(result => {
 			if (result) {
 
-				let accountIndex = this.accounts.indexOf(account);
-				this.accountService.update(account.id, result).subscribe(res => {
-
-					this.accounts.splice(accountIndex, 1, res);
-					this.dataSource = [...this.accounts];
-				});
+				this.updateAccount(account, result);
 			}
+		});
+	}
+
+	updateAccount(account, newData): void {
+
+		let accountIndex = this.accounts.indexOf(account);
+		this.accountService.update(account.id, newData).subscribe(res => {
+
+			this.accounts.splice(accountIndex, 1, res);
+			this.dataSource = [...this.accounts];
 		});
 	}
 }

@@ -12,78 +12,78 @@ import { AuthService } from 'src/app/services/auth.service';
 
 describe('Test Login Component', () => {
 
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let httpClient: HttpClient;
-  let httpTestingController: HttpTestingController;
+	let component: LoginComponent;
+	let fixture: ComponentFixture<LoginComponent>;
+	let httpClient: HttpClient;
+	let httpTestingController: HttpTestingController;
 
-  beforeEach(async(() => {
+	beforeEach(async(() => {
 
-    TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        FormsModule,
-        MaterialModule,
-        FlexLayoutModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientTestingModule
-      ],
-      declarations: [LoginComponent]
-    }).compileComponents();
+		TestBed.configureTestingModule({
+			imports: [
+				ReactiveFormsModule,
+				FormsModule,
+				MaterialModule,
+				FlexLayoutModule,
+				BrowserAnimationsModule,
+				AppRoutingModule,
+				HttpClientTestingModule
+			],
+			declarations: [LoginComponent]
+		}).compileComponents();
 
-    httpClient = TestBed.inject(HttpClient);
-    httpTestingController = TestBed.inject(HttpTestingController);
-  }));
+		httpClient = TestBed.inject(HttpClient);
+		httpTestingController = TestBed.inject(HttpTestingController);
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(LoginComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeDefined();
-  });
+	it('should create', () => {
+		expect(component).toBeDefined();
+	});
 
-  it('should be validated', () => {
+	it('should be validated', () => {
 
-    component.loginForm.setValue({
-      email: 'test',
-      password: 'test'
-    });
+		component.loginForm.setValue({
+			email: 'test',
+			password: 'test'
+		});
 
-    component.login();
-    expect(component.loginForm.valid).toBe(false);
-    expect(component.isLogging).toBe(false);
+		component.login();
+		expect(component.loginForm.valid).toBe(false);
+		expect(component.isLogging).toBe(false);
 
-    component.loginForm.setValue({
-      email: 'test@test.com',
-      password: 'test'
-    });
+		component.loginForm.setValue({
+			email: 'test@test.com',
+			password: 'test'
+		});
 
-    component.login();
-    expect(component.loginForm.valid).toBe(true);
-    expect(component.isLogging).toBe(true);
+		component.login();
+		expect(component.loginForm.valid).toBe(true);
+		expect(component.isLogging).toBe(true);
 
-    const req = httpTestingController.expectOne(AuthService.LOGIN_API_URL);
-    let errorDetail: string = 'No active account found with the given credentials';
+		const req = httpTestingController.expectOne(AuthService.LOGIN_API_URL);
+		let errorDetail: string = 'No active account found with the given credentials';
 
-    req.flush({
-      detail: errorDetail
-    }, {
-      status: 403,
-      statusText: 'Unauthorized'
-    });
+		req.flush({
+			detail: errorDetail
+		}, {
+			status: 403,
+			statusText: 'Unauthorized'
+		});
 
-    expect(component.isLogging).toBe(false);
-    expect(component.error).toBe('No active account found with the given credentials');
-    fixture.detectChanges();
+		expect(component.isLogging).toBe(false);
+		expect(component.error).toBe('No active account found with the given credentials');
+		fixture.detectChanges();
 
-    let loginElement: HTMLElement = fixture.nativeElement;
-    let errorElement = loginElement.querySelector('span.error.ng-star-inserted');
-    expect(errorElement.textContent).toContain(errorDetail);
+		let loginElement: HTMLElement = fixture.nativeElement;
+		let errorElement = loginElement.querySelector('span.error.ng-star-inserted');
+		expect(errorElement.textContent).toContain(errorDetail);
 
-    httpTestingController.verify();
-  });
+		httpTestingController.verify();
+	});
 });
