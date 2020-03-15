@@ -2,13 +2,17 @@ import { Observable, of } from 'rxjs';
 
 export class MatDialogRefMock {
 
-	afterClosed(): Observable<any> {
+	// tslint:disable-next-line: variable-name
+	private _status: number = 0;
 
-		return of([
-			{
-				name: 'test',
-				amount: 500
-			}
-		]);
+	getStatus() {
+
+		return this._status;
+	}
+
+	close(value: any) {
+
+		this._status = 1;
+		return value;
 	}
 }

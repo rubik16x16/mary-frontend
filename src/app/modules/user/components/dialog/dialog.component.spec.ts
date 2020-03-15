@@ -5,17 +5,7 @@ import { MaterialModule } from '../../../../material.module';
 import { Observable, of } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-export class MatDialogRefMock {
-
-	afterClosed(): Observable<any> {
-
-		return of([
-			{
-				name: 'test',
-				amount: 500
-			}
-		]);
-	}
+class MatDialogRefMock {
 }
 
 let dialogRef = new MatDialogRefMock();

@@ -27,7 +27,6 @@ export class EditModalComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		// console.log(this.data);
 		this.newAccountForm.patchValue({
 			name: this.data.account.name
 		});

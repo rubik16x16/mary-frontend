@@ -10,7 +10,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 
-describe('Test Login Component', () => {
+describe('Login Component', () => {
 
 	let component: LoginComponent;
 	let fixture: ComponentFixture<LoginComponent>;
