@@ -85,6 +85,22 @@ describe('AccountService', () => {
 		httpTestingController.verify();
 	});
 
+	it('should update a record', () => {
+
+		let accountId = 1;
+		accountService.update(accountId, ACCOUNTS[0]).subscribe(res => {
+
+			let transaction = new Account(ACCOUNTS[0]);
+
+			expect(transaction).toEqual(res);
+		});
+
+		let req = httpTestingController.expectOne(`${AccountService.API_URL}/${accountId}/`);
+		expect(req.request.method).toEqual('PUT');
+		req.flush(ACCOUNTS[0]);
+		httpTestingController.verify();
+	});
+
 	it('should delete a record', () => {
 
 		accountService.delete(1).subscribe();

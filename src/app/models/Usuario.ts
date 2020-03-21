@@ -1,22 +1,22 @@
 export class Usuario {
 
-  // tslint:disable-next-line: variable-name
-  private _email: string;
+	// tslint:disable-next-line: variable-name
+	private _email: string;
 
-  constructor(
-    email: string
-  ) {
+	constructor(
+		email: string
+	) {
 
-    this.email = email;
-  }
+		this.email = email;
+	}
 
-  get email(): string {
+	get email(): string {
 
-    return this._email;
-  }
+		return this._email;
+	}
 
-  set email(value: string) {
+	set email(value: string) {
 
-    this._email = value;
-  }
+		this._email = value;
+	}
 }

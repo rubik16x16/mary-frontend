@@ -1,22 +1,18 @@
 import { Usuario } from './Usuario';
-import { Transaction } from './Transaction';
 import { Model } from './Model';
-export class Account extends Model {
+
+export class Transaction extends Model {
 
 	// tslint:disable-next-line: variable-name
 	private _id: number;
 	// tslint:disable-next-line: variable-name
-	private _name: string;
+	private _description: string;
 	// tslint:disable-next-line: variable-name
 	private _amount: number;
-	// tslint:disable-next-line: variable-name
-	transactions: Transaction[];
 
-	protected fillable = ['id', 'name', 'amount', 'transactions'];
+	protected fillable = ['id', 'description', 'amount'];
 
-	constructor(
-		object: any = {}
-	) {
+	constructor(object: any) {
 
 		super();
 		this.fill(object);
@@ -32,14 +28,14 @@ export class Account extends Model {
 		this._id = id;
 	}
 
-	get name(): string {
+	get description(): string {
 
-		return this._name;
+		return this._description;
 	}
 
-	set name(name: string) {
+	set description(description: string) {
 
-		this._name = name;
+		this._description = description;
 	}
 
 	get amount(): number {
@@ -52,18 +48,12 @@ export class Account extends Model {
 		this._amount = amount;
 	}
 
-	clone(): Account {
-
-		return new Account({...this.toJSON()});
-	}
-
 	toJSON(): any {
 
 		return {
 			id: this.id,
-			name: this.name,
+			description: this.description,
 			amount: this.amount,
-			transactions: this.transactions
 		};
 	}
 }

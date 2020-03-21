@@ -5,90 +5,85 @@ import { LoadBarService } from '../../../../services/load-bar.service';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-basic-template',
-  templateUrl: './basic-template.component.html',
-  styleUrls: ['./basic-template.component.scss']
+	selector: 'app-basic-template',
+	templateUrl: './basic-template.component.html',
+	styleUrls: ['./basic-template.component.scss']
 })
 export class BasicTemplateComponent implements OnInit {
 
-  sideBarOpened: boolean = false;
-  showLoadBar: boolean = false;
+	sideBarOpened: boolean = false;
+	showLoadBar: boolean = false;
 
-  config = {
-    paddingAtStart: true,
-    interfaceWithRoute: true,
-    classname: 'my-custom-class',
-    listBackgroundColor: `rgb(208, 241, 239)`,
-    fontColor: `rgb(8, 54, 71)`,
-    backgroundColor: `rgb(208, 241, 239)`,
-    selectedListFontColor: `red`,
-    highlightOnSelect: true,
-    collapseOnSelect: true,
-    rtlLayout: false
-  };
+	config = {
+		paddingAtStart: true,
+		interfaceWithRoute: true,
+		classname: 'my-custom-class',
+		listBackgroundColor: `rgb(208, 241, 239)`,
+		fontColor: `rgb(8, 54, 71)`,
+		backgroundColor: `rgb(208, 241, 239)`,
+		selectedListFontColor: `red`,
+		highlightOnSelect: true,
+		collapseOnSelect: true,
+		rtlLayout: false
+	};
 
-  appitems = [
-    {
-      label: 'Mary',
-      imageIcon: 'favicon.ico',
-      url: '/dashboard',
-    },
-    {
-      label: 'Accounts',
-      icon: 'alarm',
-      url: '/accounts'
-    },
-    {
-      label: 'Transacciones',
-      icon: 'alarm',
-      url: '/transacciones'
-    },
-    {
-      label: 'Perfil',
-      icon: 'alarm',
-      url: '/perfil'
-    }
-  ];
+	appitems = [
+		{
+			label: 'Mary',
+			imageIcon: 'favicon.ico',
+			url: '/dashboard',
+		},
+		{
+			label: 'Accounts',
+			icon: 'alarm',
+			url: '/accounts'
+		},
+		{
+			label: 'Perfil',
+			icon: 'alarm',
+			url: '/perfil'
+		}
+	];
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private loadBarService: LoadBarService
-  ) { }
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private loadBarService: LoadBarService
+	) { }
 
-  ngOnInit() {
+	ngOnInit() {
 
-    this.loadBarService.loading$.pipe(
-      delay(0)
-    ).subscribe(res => {
+		this.loadBarService.loading$.pipe(
+			delay(0)
+		).subscribe(res => {
 
-      this.showLoadBar = res;
-    });
-  }
+			this.showLoadBar = res;
+		});
+	}
 
-  toggleSideBar() {
+	toggleSideBar() {
 
-    this.sideBarOpened = !this.sideBarOpened;
-  }
+		this.sideBarOpened = !this.sideBarOpened;
+	}
 
-  logOut() {
+	logOut() {
 
-    this.authService.logOut();
-    this.router.navigate(['/login']);
-  }
+		this.authService.logOut();
+		this.router.navigate(['/login']);
+	}
 
-  isLogin() {
+	isLogin() {
 
-    return this.authService.isLogin();
-  }
+		return this.authService.isLogin();
+	}
 
-  selectedItem(item: any) {
+	selectedItem(item: any) {
 
-    this.router.navigate([item.url]);
-    this.sideBarOpened = false;
-  }
+		this.router.navigate([item.url]);
+		this.sideBarOpened = false;
+	}
 
-  selectedLabel(label: any) {
+	selectedLabel(label: any) {
 
-  }
+	}
 }

@@ -50,7 +50,6 @@ describe('EditModalComponent', () => {
 
 		expect(component).toBeTruthy();
 
-		console.log(component.newAccountForm.value);
 		expect(component.newAccountForm.value).toEqual({name: 'test'});
 		expect(component.amount.value).toEqual(350);
 	});

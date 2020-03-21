@@ -7,48 +7,54 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
-import { TransaccionesComponent } from './pages/transacciones/transacciones.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
+import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: BasicTemplate,
-    children: [
-      {
-        path: '',
-        component: IndexComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [GuestGuard]
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'accounts',
-        component: AccountsComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'transacciones',
-        component: TransaccionesComponent,
-        canActivate: [AuthGuard]
-      }
-    ]
-  }
+	{
+		path: '',
+		component: BasicTemplate,
+		children: [
+			{
+				path: '',
+				component: IndexComponent
+			},
+			{
+				path: 'login',
+				component: LoginComponent,
+				canActivate: [GuestGuard]
+			},
+			{
+				path: 'register',
+				component: RegisterComponent
+			},
+			{
+				path: 'dashboard',
+				component: DashboardComponent,
+				canActivate: [AuthGuard]
+			},
+			{
+				path: 'accounts',
+				component: AccountsComponent,
+				canActivate: [AuthGuard],
+			},
+			{
+				path: 'accounts/:id',
+				canActivate: [AuthGuard],
+				children: [
+					{
+						path: 'transactions',
+						component: TransactionsComponent,
+						canActivate: [AuthGuard]
+					}
+				]
+			}
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class UserRoutingModule { }
