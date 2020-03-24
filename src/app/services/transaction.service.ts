@@ -14,19 +14,27 @@ export class TransactionService {
 		private httpClient: HttpClient
 	) { }
 
-	all(accountId: number): Observable<Transaction[]> {
+	all(accountId: number, page: number = 1): Observable<any> {
 
-		return this.httpClient.get(`${environment.apiUrl}/user/accounts/${accountId}/transactions/`).pipe(
-			map((items: any[]) => {
-				return items.map(item => new Transaction(item));
+		return this.httpClient.get(`${environment.apiUrl}/user/accounts/${accountId}/transactions/?page=${page}`).pipe(
+			map((res: any) => {
+				return {
+					items: res.items.map(item => new Transaction(item)),
+					num_pages: res.num_pages
+				};
 			})
 		);
 	}
 
-	create(accountId: number, data: any): Observable<Transaction> {
+	create(accountId: number, data: any): Observable<any> {
 
 		return this.httpClient.post(`${environment.apiUrl}/user/accounts/${accountId}/transactions/`, data).pipe(
-			map((item: any) => new Transaction(item))
+			map((res: any) => {
+				return {
+					item: new Transaction(res.item),
+					num_pages: res.num_pages
+				};
+			})
 		);
 	}
 

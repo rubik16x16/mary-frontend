@@ -9,6 +9,10 @@ export class Transaction extends Model {
 	private _description: string;
 	// tslint:disable-next-line: variable-name
 	private _amount: number;
+	// tslint:disable-next-line: variable-name
+	private _createdAt: string;
+	// tslint:disable-next-line: variable-name
+	private _updatedAt: string;
 
 	protected fillable = ['id', 'description', 'amount'];
 
@@ -46,6 +50,26 @@ export class Transaction extends Model {
 	set amount(amount: number) {
 
 		this._amount = amount;
+	}
+
+	get createdAt(): string {
+
+		return this._createdAt;
+	}
+
+	set createdAt(createdAt: string) {
+
+		this._createdAt = createdAt;
+	}
+
+	get updatedAt(): string {
+
+		return this._updatedAt;
+	}
+
+	set updatedAt(updatedAt: string) {
+
+		this._updatedAt = updatedAt;
 	}
 
 	toJSON(): any {

@@ -1,10 +1,10 @@
-<form [formGroup]="newAccountForm" (submit)="save()" fxLayout="column">
-	<mat-form-field fxFlex class="form-field">
-		<mat-label>Name</mat-label>
-		<input matInput formControlName="name" placeholder="Name">
-		<mat-error *ngIf="newAccountForm.controls.name.hasError('required')">
-			Name is <strong>required</strong>
-		</mat-error>
+<form [formGroup]="newTransactionForm" (submit)="save()" fxLayout="column">
+  <mat-form-field fxFlex class="form-field">
+    <mat-label>Description</mat-label>
+    <input matInput formControlName="description" placeholder="Description">
+    <mat-error *ngIf="newTransactionForm.controls.description.hasError('required')">
+      Description is <strong>required</strong>
+    </mat-error>
 	</mat-form-field>
 	<div fxFlex class="form-field">
 		<label for="amount">Amount</label>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-create-modal',
@@ -9,8 +9,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CreateModalComponent implements OnInit {
 
-	newAccountForm = this.fb.group({
-		name: ['', Validators.required],
+	newTransactionForm = this.fb.group({
+		description: ['', Validators.required],
 	});
 
 	amount: any = {
@@ -21,9 +21,10 @@ export class CreateModalComponent implements OnInit {
 	};
 
 	constructor(
-		public dialogRef: MatDialogRef<CreateModalComponent>,
+		private dialogRef: MatDialogRef<CreateModalComponent>,
 		private fb: FormBuilder,
-		@Inject(MAT_DIALOG_DATA) public data: any) {}
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) { }
 
 	ngOnInit(): void {
 	}
@@ -52,12 +53,13 @@ export class CreateModalComponent implements OnInit {
 			this.amount.errors.required = true;
 		}
 
-		if (this.newAccountForm.valid && !this.amount.errors.required) {
+		if (this.newTransactionForm.valid && !this.amount.errors.required) {
 
 			this.dialogRef.close({
-				...this.newAccountForm.value,
+				...this.newTransactionForm.value,
 				amount: this.amount.value
 			});
 		}
 	}
+
 }

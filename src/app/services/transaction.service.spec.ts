@@ -39,16 +39,22 @@ describe('TransactionService', () => {
 	it('should get all transactions', () => {
 
 		let accountId = 1;
+
 		service.all(accountId).subscribe(res => {
 
-			let transactions = 	TRANSACTIONS_DATA.map(item => new Transaction(item));
-
-			expect(transactions).toEqual(res);
+			let test_res = {
+				items: TRANSACTIONS_DATA.map(item => new Transaction(item)),
+				num_pages: 1
+			};
+			expect(test_res).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/accounts/${accountId}/transactions/`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/accounts/${accountId}/transactions/?page=1`);
 		expect(req.request.method).toEqual('GET');
-		req.flush(TRANSACTIONS_DATA);
+		req.flush({
+			items: TRANSACTIONS_DATA,
+			num_pages: 1
+		});
 		httpTestingController.verify();
 	});
 
@@ -59,13 +65,16 @@ describe('TransactionService', () => {
 
 			let transaction = new Transaction(TRANSACTIONS_DATA[0]);
 
-			expect(transaction).not.toBe(res);
-			expect(transaction).toEqual(res);
+			expect(transaction).not.toBe(res.item);
+			expect(transaction).toEqual(res.item);
 		});
 
 		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/accounts/${accountId}/transactions/`);
 		expect(req.request.method).toEqual('POST');
-		req.flush(TRANSACTIONS_DATA[0]);
+		req.flush({
+			item: TRANSACTIONS_DATA[0],
+			num_pages: 1
+		});
 		httpTestingController.verify();
 	});
 

@@ -13,16 +13,19 @@ import { GlobalModule } from 'src/app/global.module';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { CreateModalComponent as AccountCreateModalComponent } from './pages/accounts/create-modal/create-modal.component';
+import { EditModalComponent as AccountEditModalComponent } from './pages/accounts/edit-modal/edit-modal.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { EditModalComponent } from './pages/accounts/edit-modal/edit-modal.component';
 import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
+import { CreateModalComponent as TransactionsCreateModalComponent } from './pages/accounts/transactions/create-modal/create-modal.component';
+import { EditModalComponent as TransactionsEditModalComponent } from './pages/accounts/transactions/edit-modal/edit-modal.component';
 
 @NgModule({
 	declarations: [
 		IndexComponent, BasicTemplateComponent,
 		LoginComponent, RegisterComponent, DashboardComponent,
 		AccountsComponent, AccountCreateModalComponent, DialogComponent,
-		EditModalComponent, TransactionsComponent
+		AccountEditModalComponent, TransactionsComponent,
+		TransactionsCreateModalComponent, TransactionsEditModalComponent
 	],
 	imports: [
 		CommonModule,
