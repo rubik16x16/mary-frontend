@@ -19,8 +19,8 @@
 		<ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let transaction" class="actions">
-				<!-- <button (click)="openEditModal(account)"  mat-raised-button color="accent">Edit</button>
-				<button (click)="delete(account)" mat-raised-button color="warn">Delete</button> -->
+				<!-- <button (click)="openEditModal(account)"  mat-raised-button color="accent">Edit</button> -->
+				<button (click)="delete(transaction)" mat-raised-button color="warn">Delete</button>
 			</td>
     </ng-container>
 
@@ -30,10 +30,12 @@
 </div>
 
 <button
-	mat-raised-button [color]="page.active ? 'accent' : 'basic'"
+	mat-raised-button
+	[color]="page.active ? 'accent' : 'basic'"
+	[disabled]="page.active ? true : false"
 	*ngFor="let page of pages"
 	(click)="get_transactions(page.index)">
 	{{ page.index }}
 </button>
 
-<button mat-raised-button color="primary" (click)="createNewTransaction()">Create</button>
+<button mat-raised-button color="primary" (click)="create()">Create</button>

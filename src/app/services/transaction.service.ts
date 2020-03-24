@@ -20,7 +20,7 @@ export class TransactionService {
 			map((res: any) => {
 				return {
 					items: res.items.map(item => new Transaction(item)),
-					num_pages: res.num_pages
+					numPages: res.num_pages
 				};
 			})
 		);
@@ -32,7 +32,7 @@ export class TransactionService {
 			map((res: any) => {
 				return {
 					item: new Transaction(res.item),
-					num_pages: res.num_pages
+					numPages: res.num_pages
 				};
 			})
 		);
@@ -40,20 +40,29 @@ export class TransactionService {
 
 	get(transactionId: number): Observable<Transaction> {
 
-		return this.httpClient.get(`${environment.apiUrl}/user/transactions/${transactionId}`).pipe(
+		return this.httpClient.get(`${environment.apiUrl}/user/transactions/${transactionId}/`).pipe(
 			map((item: any) => new Transaction(item))
 		);
 	}
 
 	update(transactionId: number, data: any): Observable<Transaction> {
 
-		return this.httpClient.put(`${environment.apiUrl}/user/transactions/${transactionId}`, data).pipe(
+		return this.httpClient.put(`${environment.apiUrl}/user/transactions/${transactionId}/`, data).pipe(
 			map((item: any) => new Transaction(item))
 		);
 	}
 
-	delete(transactionId: number): Observable<any> {
+	delete(transactionId: number, page: number): Observable<any> {
 
-		return this.httpClient.delete(`${environment.apiUrl}/user/transactions/${transactionId}`);
+		let url = `${environment.apiUrl}/user/transactions/${transactionId}/?page=${page}`;
+		return this.httpClient.delete(url).pipe(
+			map((res: any) => {
+
+				return {
+					items: res.items.map(item => new Transaction(item)),
+					numPages: res.num_pages
+				};
+			})
+		);
 	}
 }

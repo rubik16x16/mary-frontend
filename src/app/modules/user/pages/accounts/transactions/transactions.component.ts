@@ -4,6 +4,7 @@ import { Transaction } from 'src/app/models/Transaction';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
+import { DialogComponent } from '../../../components/dialog/dialog.component';
 
 @Component({
 	selector: 'app-transactions',
@@ -55,12 +56,12 @@ export class TransactionsComponent implements OnInit {
 
 			this.transactions = res.items;
 			this.page = page;
-			this.numPages = res.num_pages;
+			this.numPages = res.numPages;
 			this.refreshData();
 		});
 	}
 
-	createNewTransaction(): void {
+	create(): void {
 
 		this.dialogRef = this.dialog.open(CreateModalComponent, {
 			width: '450'
@@ -77,7 +78,44 @@ export class TransactionsComponent implements OnInit {
 						this.transactions.pop();
 						this.transactions.unshift(res.item);
 					}
-					this.numPages = res.num_pages;
+					this.numPages = res.numPages;
+					this.refreshData();
+				});
+			}
+		});
+	}
+
+	delete(transaction: Transaction): void {
+
+		this.dialogRef = this.dialog.open(DialogComponent, {
+			width: '250px',
+			data: {
+				msg: `Surely you want to delete account ${transaction.id}`
+			}
+		});
+
+		this.dialogRef.afterClosed().subscribe(result => {
+
+			if (result) {
+
+				this.transactionsService.delete(transaction.id, this.page).subscribe(res => {
+
+					this.numPages = res.numPages;
+
+					if (res.items.length > 0) {
+
+						this.transactions = res.items;
+						this.refreshData();
+						return;
+					}
+
+					if (this.page > 1) {
+
+						this.get_transactions(this.page - 1);
+						return;
+					}
+
+					this.transactions = [];
 					this.refreshData();
 				});
 			}
