@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
 	selector: 'app-transactions',
@@ -33,7 +34,7 @@ export class TransactionsComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.accountId = +this.route.snapshot.paramMap.get('id');
-		this.get_transactions();
+		this.getTransactions(1);
 	}
 
 	refreshData() {
@@ -50,7 +51,7 @@ export class TransactionsComponent implements OnInit {
 		this.dataSource = [...this.transactions];
 	}
 
-	get_transactions(page= 1): void {
+	getTransactions(page): void {
 
 		this.transactionsService.all(this.accountId, page).subscribe(res => {
 
@@ -77,9 +78,34 @@ export class TransactionsComponent implements OnInit {
 
 						this.transactions.pop();
 						this.transactions.unshift(res.item);
+						this.numPages = res.numPages;
+						this.refreshData();
+					} else {
+
+						this.getTransactions(1);
 					}
-					this.numPages = res.numPages;
-					this.refreshData();
+				});
+			}
+		});
+	}
+
+	edit(transaction: Transaction): void {
+
+		this.dialogRef = this.dialog.open(EditModalComponent, {
+			width: '450px',
+			data: {
+				transaction
+			}
+		});
+
+		this.dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+
+				let transactionIndex = this.transactions.indexOf(transaction);
+				this.transactionsService.update(transaction.id, result).subscribe(res => {
+
+					this.transactions.splice(transactionIndex, 1, res);
+					this.dataSource = [...this.transactions];
 				});
 			}
 		});
@@ -111,7 +137,7 @@ export class TransactionsComponent implements OnInit {
 
 					if (this.page > 1) {
 
-						this.get_transactions(this.page - 1);
+						this.getTransactions(this.page - 1);
 						return;
 					}
 

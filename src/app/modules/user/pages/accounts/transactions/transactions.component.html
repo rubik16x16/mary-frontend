@@ -19,7 +19,7 @@
 		<ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let transaction" class="actions">
-				<!-- <button (click)="openEditModal(account)"  mat-raised-button color="accent">Edit</button> -->
+				<button (click)="edit(transaction)"  mat-raised-button color="accent">Edit</button>
 				<button (click)="delete(transaction)" mat-raised-button color="warn">Delete</button>
 			</td>
     </ng-container>
@@ -34,7 +34,7 @@
 	[color]="page.active ? 'accent' : 'basic'"
 	[disabled]="page.active ? true : false"
 	*ngFor="let page of pages"
-	(click)="get_transactions(page.index)">
+	(click)="getTransactions(page.index)">
 	{{ page.index }}
 </button>
 
