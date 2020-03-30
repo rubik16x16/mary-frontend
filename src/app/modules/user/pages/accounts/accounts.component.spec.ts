@@ -22,7 +22,7 @@ let mockAccountService: Partial<AccountService> = {
 
 	all(): Observable<Account[]> {
 
-		return of([...testAccountsData].map(item => {
+		return of(testAccountsData.map(item => {
 
 			return new Account(item);
 		}));
@@ -98,7 +98,6 @@ describe('AccountsComponent', () => {
 	}));
 
 	it('should edit account', fakeAsync(() => {
-
 
 		let editAccount = testAccounts[0].clone();
 		component.openEditModal(editAccount);

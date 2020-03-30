@@ -65,7 +65,7 @@ export class TransactionsComponent implements OnInit {
 	create(): void {
 
 		this.dialogRef = this.dialog.open(CreateModalComponent, {
-			width: '450'
+			width: '450px'
 		});
 
 		this.dialogRef.afterClosed().subscribe(result => {
@@ -76,7 +76,10 @@ export class TransactionsComponent implements OnInit {
 
 					if (this.page === 1) {
 
-						this.transactions.pop();
+						if (this.transactions.length === this.transactionsService.recordsPerPage) {
+
+							this.transactions.pop();
+						}
 						this.transactions.unshift(res.item);
 						this.numPages = res.numPages;
 						this.refreshData();
@@ -102,6 +105,7 @@ export class TransactionsComponent implements OnInit {
 			if (result) {
 
 				let transactionIndex = this.transactions.indexOf(transaction);
+
 				this.transactionsService.update(transaction.id, result).subscribe(res => {
 
 					this.transactions.splice(transactionIndex, 1, res);
@@ -124,6 +128,7 @@ export class TransactionsComponent implements OnInit {
 
 			if (result) {
 
+				console.log('test');
 				this.transactionsService.delete(transaction.id, this.page).subscribe(res => {
 
 					this.numPages = res.numPages;

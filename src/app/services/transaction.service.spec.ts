@@ -44,13 +44,14 @@ describe('TransactionService', () => {
 
 			let test_res = {
 				items: TRANSACTIONS_DATA.map(item => new Transaction(item)),
-				num_pages: 1
+				numPages: 1
 			};
 			expect(test_res).toEqual(res);
 		});
 
 		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/accounts/${accountId}/transactions/?page=1`);
 		expect(req.request.method).toEqual('GET');
+
 		req.flush({
 			items: TRANSACTIONS_DATA,
 			num_pages: 1
@@ -88,7 +89,7 @@ describe('TransactionService', () => {
 			expect(transaction).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}/`);
 		expect(req.request.method).toEqual('GET');
 		req.flush(TRANSACTIONS_DATA[0]);
 		httpTestingController.verify();
@@ -105,7 +106,7 @@ describe('TransactionService', () => {
 			expect(transaction).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}/`);
 		expect(req.request.method).toEqual('PUT');
 		req.flush(TRANSACTIONS_DATA[0]);
 		httpTestingController.verify();
@@ -114,10 +115,13 @@ describe('TransactionService', () => {
 	it('should delete a transaction', () => {
 
 		let transactionId = 1;
-		service.delete(transactionId).subscribe();
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}`);
+		service.delete(transactionId, 1).subscribe();
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transactions/${transactionId}/?page=1`);
 		expect(req.request.method).toEqual('DELETE');
-		req.flush('');
+		req.flush({
+			items: TRANSACTIONS_DATA,
+			num_pages: 1
+		});
 		httpTestingController.verify();
 	});
 });

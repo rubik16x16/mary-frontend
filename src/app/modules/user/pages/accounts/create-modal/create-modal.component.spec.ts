@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateModalComponent } from './create-modal.component';
-import { MaterialModule } from '../../../../../material.module';
+import { MaterialModule } from 'src/app/material.module';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogRefMock } from '../mat-dialog-ref-mock';
+import { MatDialogRefMock } from 'src/app/test-tools/mat-dialog-ref-mock';
 
 let dialogRef = new MatDialogRefMock();
 let data = {};

@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class TransactionService {
 
+	readonly recordsPerPage: number = 5;
+
 	constructor(
 		private httpClient: HttpClient
 	) { }
