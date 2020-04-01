@@ -41,7 +41,7 @@ let mockAccountService: Partial<AccountService> = {
 	}
 };
 
-describe('AccountsComponent', () => {
+describe('Accounts page', () => {
 
 	let component: AccountsComponent;
 	let fixture: ComponentFixture<AccountsComponent>;

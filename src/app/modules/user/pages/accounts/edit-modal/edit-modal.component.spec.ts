@@ -15,7 +15,7 @@ let data = {
 	}
 };
 
-describe('EditModalComponent', () => {
+describe('Accounts edit modal', () => {
 	let component: EditModalComponent;
 	let fixture: ComponentFixture<EditModalComponent>;
 

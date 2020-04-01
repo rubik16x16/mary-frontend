@@ -66,7 +66,7 @@ let mockTransactionsService: Partial<TransactionService> = {
 	}
 };
 
-describe('TransactionsComponent', () => {
+describe('Transactions page', () => {
 
 	let component: TransactionsComponent;
 	let fixture: ComponentFixture<TransactionsComponent>;
