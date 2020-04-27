@@ -10,27 +10,27 @@ import { LoadBarInterceptorService } from './services/load-bar-interceptor.servi
 import { LoadBarService } from './services/load-bar.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadBarInterceptorService,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		HttpClientModule
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptorService,
+			multi: true
+		},
+		// {
+		// 	provide: HTTP_INTERCEPTORS,
+		// 	useClass: LoadBarInterceptorService,
+		// 	multi: true
+		// }
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

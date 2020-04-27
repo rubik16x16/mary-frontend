@@ -73,10 +73,6 @@ describe('Transactions edit modal', () => {
 		expect(dialogRef.getStatus()).toBe(0);
 
 		component.changeAmount(200);
-		component.form.setValue({
-			name: 'test'
-		});
-
 		component.save();
 		expect(dialogRef.getStatus()).toBe(1);
 	});

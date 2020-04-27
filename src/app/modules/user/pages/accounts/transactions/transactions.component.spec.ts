@@ -9,6 +9,7 @@ import { of, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Account } from 'src/app/models/Account';
 
 let testTransactionsData: any[] = [
 	{
@@ -35,6 +36,22 @@ class MockActivatedRoute {
 			}
 		}
 	};
+
+	data: Observable<any>;
+
+	constructor() {
+
+		let data = {
+			data: {
+				account: new Account({id: 1, name: 'test', amount: 300}),
+				transactions: {
+					items: testTransactionsData.map(item => new Transaction(item)),
+					numPages: 1
+				}
+			}
+		};
+		this.data = of(data);
+	}
 }
 
 let mockTransactionsService: Partial<TransactionService> = {

@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class LoadBarService {
 
-  private loadingSource = new Subject<boolean>();
+	private loadingSource = new Subject<boolean>();
 
-  loading$ = this.loadingSource.asObservable();
+	loading$ = this.loadingSource.asObservable();
 
-  constructor() { }
+	constructor() { }
 
-  showLoadBar(value: boolean): void {
+	showLoadBar(value: boolean): void {
 
-    this.loadingSource.next(value);
-  }
+		this.loadingSource.next(value);
+	}
 }

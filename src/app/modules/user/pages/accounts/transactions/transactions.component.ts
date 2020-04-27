@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TransactionService } from '../../../../../services/transaction.service';
+import { TransactionService } from 'src/app/services/transaction.service';
 import { Transaction } from 'src/app/models/Transaction';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { AccountService } from 'src/app/services/account.service';
+import { Account } from 'src/app/models/Account';
 
 @Component({
 	selector: 'app-transactions',
@@ -19,7 +21,7 @@ export class TransactionsComponent implements OnInit {
 	displayedColumns: string[] = [
 		'id', 'description', 'amount', 'actions'
 	];
-	accountId: number;
+	account: Account;
 	pages: any[] = [];
 	page: number = 1;
 	numPages: number;
@@ -33,8 +35,15 @@ export class TransactionsComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		this.accountId = +this.route.snapshot.paramMap.get('id');
-		this.getTransactions(1);
+		this.route.data.subscribe(res => {
+
+			let data = res.data;
+			this.account = data.account;
+			this.transactions = data.transactions.items;
+			this.page = 1;
+			this.numPages = data.transactions.numPages;
+			this.refreshData();
+		});
 	}
 
 	refreshData() {
@@ -53,7 +62,7 @@ export class TransactionsComponent implements OnInit {
 
 	getTransactions(page): void {
 
-		this.transactionsService.all(this.accountId, page).subscribe(res => {
+		this.transactionsService.all(this.account.id, page).subscribe(res => {
 
 			this.transactions = res.items;
 			this.page = page;
@@ -72,7 +81,7 @@ export class TransactionsComponent implements OnInit {
 
 			if (result) {
 
-				this.transactionsService.create(this.accountId, result).subscribe(res => {
+				this.transactionsService.create(this.account.id, result).subscribe(res => {
 
 					if (this.page === 1) {
 

@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
+import { TransactionsResolverService } from './pages/accounts/transactions/transactions-resolver.service';
 
 const routes: Routes = [
 	{
@@ -45,7 +46,10 @@ const routes: Routes = [
 					{
 						path: 'transactions',
 						component: TransactionsComponent,
-						canActivate: [AuthGuard]
+						canActivate: [AuthGuard],
+						resolve: {
+							data: TransactionsResolverService
+						}
 					}
 				]
 			}
