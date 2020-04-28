@@ -1,3 +1,12 @@
-<p>{{ data.msg }}</p>
-<button (click)="close(true)" mat-raised-button color="accent">Accept</button>
-<button (click)="close(false)" mat-raised-button color="warn">Cancel</button>
+<mat-card class="example-card">
+	<mat-card-header>
+		<mat-card-title>{{ data.title }}</mat-card-title>
+	</mat-card-header>
+	<mat-card-content fxLayout="column">
+		<p>{{ data.msg }}</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<button (click)="close(true)" mat-raised-button color="accent">Accept</button>
+		<button (click)="close(false)" mat-raised-button color="warn">Cancel</button>
+	</mat-card-actions>
+</mat-card>

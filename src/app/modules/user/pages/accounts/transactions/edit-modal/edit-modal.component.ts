@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
+import { TransType } from 'src/app/models/Transaction';
 
 @Component({
 	selector: 'app-edit-modal',
@@ -19,6 +20,8 @@ export class EditModalComponent implements OnInit {
 			required: false
 		}
 	};
+
+	transType = TransType;
 
 	constructor(
 		public dialogRef: MatDialogRef<EditModalComponent>,
@@ -62,7 +65,8 @@ export class EditModalComponent implements OnInit {
 
 			this.dialogRef.close({
 				...this.form.value,
-				amount: this.amount.value
+				amount: this.amount.value,
+				transType: this.data.transaction.transType
 			});
 		}
 	}

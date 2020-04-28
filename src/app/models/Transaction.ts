@@ -1,7 +1,11 @@
-import { Usuario } from './Usuario';
 import { Model } from './Model';
 
-export class Transaction extends Model {
+enum TransType {
+	INCOME = 'IN',
+	EXPENSE = 'EX'
+}
+
+class Transaction extends Model {
 
 	// tslint:disable-next-line: variable-name
 	private _id: number;
@@ -10,11 +14,13 @@ export class Transaction extends Model {
 	// tslint:disable-next-line: variable-name
 	private _amount: number;
 	// tslint:disable-next-line: variable-name
+	private _transType: TransType;
+	// tslint:disable-next-line: variable-name
 	private _createdAt: string;
 	// tslint:disable-next-line: variable-name
 	private _updatedAt: string;
 
-	protected fillable = ['id', 'description', 'amount'];
+	protected fillable = ['id', 'description', 'amount', 'transType', 'createdAt', 'updatedAt'];
 
 	constructor(object: any) {
 
@@ -52,6 +58,16 @@ export class Transaction extends Model {
 		this._amount = amount;
 	}
 
+	get transType(): TransType {
+
+		return this._transType;
+	}
+
+	set transType(transType: TransType) {
+
+		this._transType = transType;
+	}
+
 	get createdAt(): string {
 
 		return this._createdAt;
@@ -78,6 +94,9 @@ export class Transaction extends Model {
 			id: this.id,
 			description: this.description,
 			amount: this.amount,
+			trans_type: this.transType
 		};
 	}
 }
+
+export { Transaction, TransType };

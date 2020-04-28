@@ -1,20 +1,27 @@
-<form [formGroup]="newTransactionForm" (submit)="save()" fxLayout="column">
-  <mat-form-field fxFlex class="form-field">
-    <mat-label>Description</mat-label>
-    <input matInput formControlName="description" placeholder="Description">
-    <mat-error *ngIf="newTransactionForm.controls.description.hasError('required')">
-      Description is <strong>required</strong>
-    </mat-error>
-	</mat-form-field>
-	<div fxFlex class="form-field">
-		<label for="amount">Amount</label>
-		<app-input-mask id="amount" (changeVal)="changeAmount($event)"></app-input-mask>
-		<mat-error *ngIf="amount.errors.required">
-			Amount is <strong>required</strong>
-		</mat-error>
-	</div>
-	<div class="buttons">
-		<button type="submit" mat-raised-button color="primary">Save</button>
-		<button mat-raised-button color="basic" (click)="close()">Close</button>
-	</div>
-</form>
+<mat-card class="example-card" [style.background]="data.transType == transType.INCOME ? '#ccffcb' : '#ffdcdc'">
+	<mat-card-header>
+		<mat-card-title>Create modal</mat-card-title>
+	</mat-card-header>
+	<form [formGroup]="newTransactionForm" (submit)="save()">
+		<mat-card-content fxLayout="column">
+			<mat-form-field fxFlex class="form-field">
+				<mat-label>Description</mat-label>
+				<input matInput formControlName="description" placeholder="Description">
+				<mat-error *ngIf="newTransactionForm.controls.description.hasError('required')">
+					Description is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+			<div fxFlex class="form-field">
+				<label for="amount">Amount</label>
+				<app-input-mask id="amount" (changeVal)="changeAmount($event)"></app-input-mask>
+				<mat-error *ngIf="amount.errors.required">
+					Amount is <strong>required</strong>
+				</mat-error>
+			</div>
+		</mat-card-content>
+		<mat-card-actions>
+			<button type="submit" mat-raised-button color="primary">Save</button>
+			<button mat-raised-button color="basic" (click)="close()">Close</button>
+		</mat-card-actions>
+	</form>
+</mat-card>

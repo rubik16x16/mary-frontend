@@ -28,7 +28,7 @@ export class TransactionService {
 		);
 	}
 
-	create(accountId: number, data: any): Observable<any> {
+	create(accountId: number, data: Transaction): Observable<any> {
 
 		return this.httpClient.post(`${environment.apiUrl}/user/accounts/${accountId}/transactions/`, data).pipe(
 			map((res: any) => {
@@ -47,7 +47,7 @@ export class TransactionService {
 		);
 	}
 
-	update(transactionId: number, data: any): Observable<Transaction> {
+	update(transactionId: number, data: Transaction): Observable<Transaction> {
 
 		return this.httpClient.put(`${environment.apiUrl}/user/transactions/${transactionId}/`, data).pipe(
 			map((item: any) => new Transaction(item))

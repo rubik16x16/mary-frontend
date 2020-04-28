@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TransType } from 'src/app/models/Transaction';
 
 @Component({
 	selector: 'app-create-modal',
@@ -12,6 +13,8 @@ export class CreateModalComponent implements OnInit {
 	newTransactionForm = this.fb.group({
 		description: ['', Validators.required],
 	});
+
+	transType = TransType;
 
 	amount: any = {
 		value: null,
@@ -27,6 +30,8 @@ export class CreateModalComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+
+		console.log(this.data.transType);
 	}
 
 	changeAmount(amount: number) {
@@ -41,12 +46,12 @@ export class CreateModalComponent implements OnInit {
 		}
 	}
 
-	close() {
+	close(): void {
 
 		this.dialogRef.close();
 	}
 
-	save() {
+	save(): void {
 
 		if (this.amount.value === 0 || this.amount.value === null) {
 
@@ -57,7 +62,8 @@ export class CreateModalComponent implements OnInit {
 
 			this.dialogRef.close({
 				...this.newTransactionForm.value,
-				amount: this.amount.value
+				amount: this.amount.value,
+				transType: this.data.transType
 			});
 		}
 	}

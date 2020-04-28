@@ -63,7 +63,10 @@ export class AccountsComponent implements OnInit {
 
 		this.dialogRef = this.dialog.open(DialogComponent, {
 			width: '250px',
-			data: {msg: `Surely you want to delete account ${account.name}`}
+			data: {
+				title: 'Delete account',
+				msg: `Surely you want to delete account ${account.name}`
+			}
 		});
 
 		this.dialogRef.afterClosed().subscribe(result => {

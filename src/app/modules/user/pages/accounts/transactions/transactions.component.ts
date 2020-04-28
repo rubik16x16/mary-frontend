@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from 'src/app/services/transaction.service';
-import { Transaction } from 'src/app/models/Transaction';
+import { Transaction, TransType } from 'src/app/models/Transaction';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateModalComponent } from './create-modal/create-modal.component';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
-import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/Account';
 
 @Component({
@@ -16,10 +15,11 @@ import { Account } from 'src/app/models/Account';
 })
 export class TransactionsComponent implements OnInit {
 
+	transType: any = TransType;
 	dataSource: Transaction[];
 	transactions: Transaction[];
 	displayedColumns: string[] = [
-		'id', 'description', 'amount', 'actions'
+		'id', 'description', 'amount', 'createdAt', 'updatedAt', 'actions'
 	];
 	account: Account;
 	pages: any[] = [];
@@ -71,17 +71,18 @@ export class TransactionsComponent implements OnInit {
 		});
 	}
 
-	create(): void {
+	create(transType): void {
 
 		this.dialogRef = this.dialog.open(CreateModalComponent, {
-			width: '450px'
+			width: '450px',
+			data: { transType }
 		});
 
 		this.dialogRef.afterClosed().subscribe(result => {
 
 			if (result) {
 
-				this.transactionsService.create(this.account.id, result).subscribe(res => {
+				this.transactionsService.create(this.account.id, new Transaction(result)).subscribe(res => {
 
 					if (this.page === 1) {
 
@@ -115,7 +116,7 @@ export class TransactionsComponent implements OnInit {
 
 				let transactionIndex = this.transactions.indexOf(transaction);
 
-				this.transactionsService.update(transaction.id, result).subscribe(res => {
+				this.transactionsService.update(transaction.id, new Transaction(result)).subscribe(res => {
 
 					this.transactions.splice(transactionIndex, 1, res);
 					this.dataSource = [...this.transactions];
@@ -129,6 +130,7 @@ export class TransactionsComponent implements OnInit {
 		this.dialogRef = this.dialog.open(DialogComponent, {
 			width: '250px',
 			data: {
+				title: 'Delete transaction',
 				msg: `Surely you want to delete account ${transaction.id}`
 			}
 		});
