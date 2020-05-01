@@ -10,7 +10,7 @@ import { GuestGuard } from './guards/guest.guard';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
 import { TransactionsResolverService } from './pages/accounts/transactions/transactions-resolver.service';
-import { TransactionCategoriesComponent } from './pages/transaction-categories/transaction-categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 
 const routes: Routes = [
 	{
@@ -57,7 +57,7 @@ const routes: Routes = [
 			{
 				path: 'categories',
 				canActivate: [AuthGuard],
-				component: TransactionCategoriesComponent
+				component: CategoriesComponent
 			}
 		]
 	}

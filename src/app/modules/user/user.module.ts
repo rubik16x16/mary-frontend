@@ -18,7 +18,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
 import { CreateModalComponent as TransactionsCreateModalComponent } from './pages/accounts/transactions/create-modal/create-modal.component';
 import { EditModalComponent as TransactionsEditModalComponent } from './pages/accounts/transactions/edit-modal/edit-modal.component';
-import { TransactionCategoriesComponent } from './pages/transaction-categories/transaction-categories.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { CreateModalComponent as CategoriesCreateModalComponent } from './pages/categories/create-modal/create-modal.component';
+import { EditModalComponent as CategoriesEditModalComponent } from './pages/categories/edit-modal/edit-modal.component';
 
 @NgModule({
 	declarations: [
@@ -27,7 +29,7 @@ import { TransactionCategoriesComponent } from './pages/transaction-categories/t
 		AccountsComponent, AccountCreateModalComponent, DialogComponent,
 		AccountEditModalComponent, TransactionsComponent,
 		TransactionsCreateModalComponent, TransactionsEditModalComponent,
-		TransactionCategoriesComponent
+		CategoriesComponent, CategoriesCreateModalComponent, CategoriesEditModalComponent
 	],
 	imports: [
 		CommonModule,

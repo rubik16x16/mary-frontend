@@ -40,7 +40,6 @@ export class TransactionsComponent implements OnInit {
 			let data = res.data;
 			this.account = data.account;
 			this.transactions = data.transactions.items;
-			this.page = 1;
 			this.numPages = data.transactions.numPages;
 			this.refreshData();
 		});
@@ -131,7 +130,7 @@ export class TransactionsComponent implements OnInit {
 			width: '250px',
 			data: {
 				title: 'Delete transaction',
-				msg: `Surely you want to delete account ${transaction.id}`
+				msg: `Surely you want to delete transaction ${transaction.id}`
 			}
 		});
 

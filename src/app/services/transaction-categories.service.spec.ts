@@ -52,7 +52,7 @@ describe('TransactionCategoriesService', () => {
 
 	it('should create a new transaction category', () => {
 
-		service.create(CATEGORIES_TEST_DATA[0]).subscribe(res => {
+		service.create(new Category(CATEGORIES_TEST_DATA[0])).subscribe(res => {
 
 			let expectedRes = {
 				item: new Category(CATEGORIES_TEST_DATA[0]),
@@ -90,7 +90,7 @@ describe('TransactionCategoriesService', () => {
 	it('should update a transaction category', () => {
 
 		let categoryId = 1;
-		service.update(categoryId, CATEGORIES_TEST_DATA[0]).subscribe(res => {
+		service.update(categoryId, new Category(CATEGORIES_TEST_DATA[0])).subscribe(res => {
 
 			let expectedRes = new Category(CATEGORIES_TEST_DATA[0]);
 
