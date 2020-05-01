@@ -18,6 +18,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { TransactionsComponent } from './pages/accounts/transactions/transactions.component';
 import { CreateModalComponent as TransactionsCreateModalComponent } from './pages/accounts/transactions/create-modal/create-modal.component';
 import { EditModalComponent as TransactionsEditModalComponent } from './pages/accounts/transactions/edit-modal/edit-modal.component';
+import { TransactionCategoriesComponent } from './pages/transaction-categories/transaction-categories.component';
 
 @NgModule({
 	declarations: [
@@ -25,7 +26,8 @@ import { EditModalComponent as TransactionsEditModalComponent } from './pages/ac
 		LoginComponent, RegisterComponent, DashboardComponent,
 		AccountsComponent, AccountCreateModalComponent, DialogComponent,
 		AccountEditModalComponent, TransactionsComponent,
-		TransactionsCreateModalComponent, TransactionsEditModalComponent
+		TransactionsCreateModalComponent, TransactionsEditModalComponent,
+		TransactionCategoriesComponent
 	],
 	imports: [
 		CommonModule,

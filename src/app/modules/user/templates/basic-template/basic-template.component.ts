@@ -37,6 +37,11 @@ export class BasicTemplateComponent implements OnInit {
 			label: 'Accounts',
 			icon: 'alarm',
 			url: '/accounts'
+		},
+		{
+			label: 'Categories',
+			icon: 'alarm',
+			url: '/categories'
 		}
 	];
 

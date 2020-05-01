@@ -139,7 +139,6 @@ export class TransactionsComponent implements OnInit {
 
 			if (result) {
 
-				console.log('test');
 				this.transactionsService.delete(transaction.id, this.page).subscribe(res => {
 
 					this.numPages = res.numPages;

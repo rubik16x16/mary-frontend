@@ -42,11 +42,11 @@ describe('TransactionService', () => {
 
 		service.all(accountId).subscribe(res => {
 
-			let test_res = {
+			let testRes = {
 				items: TRANSACTIONS_DATA.map(item => new Transaction(item)),
 				numPages: 1
 			};
-			expect(test_res).toEqual(res);
+			expect(testRes).toEqual(res);
 		});
 
 		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/accounts/${accountId}/transactions/?page=1`);

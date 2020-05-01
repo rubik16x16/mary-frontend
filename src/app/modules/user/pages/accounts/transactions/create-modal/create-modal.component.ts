@@ -30,8 +30,6 @@ export class CreateModalComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-
-		console.log(this.data.transType);
 	}
 
 	changeAmount(amount: number) {
