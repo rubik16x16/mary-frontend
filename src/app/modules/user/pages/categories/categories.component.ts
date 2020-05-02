@@ -65,7 +65,7 @@ export class CategoriesComponent extends DataTable implements OnInit {
 				this.categoriesService.create(new Category(result)).subscribe(res => {
 
 					this.numPages = res.numPages;
-					if (this.page === this.numPages && this.numPages > 1) {
+					if (this.page === this.numPages) {
 
 						if (this.categories.length !== this.categoriesService.RECORDS_PER_PAGE) {
 

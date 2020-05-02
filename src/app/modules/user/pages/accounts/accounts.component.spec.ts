@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
 
 import { AccountsComponent } from './accounts.component';
-import { MaterialModule } from '../../../../material.module';
+import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AccountService } from '../../../../services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { Observable, of } from 'rxjs';
-import { Account } from '../../../../models/Account';
+import { Account } from 'src/app/models/Account';
 import { InputMaskComponent } from 'src/app/components/input-mask/input-mask.component';
 import { CommonModule } from '@angular/common';
 

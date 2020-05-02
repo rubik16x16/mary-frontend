@@ -127,7 +127,7 @@ describe('Transactions page', () => {
 
 		expect(component).toBeTruthy();
 		flush();
-		expect(component.transactions).toEqual(testTransactionsData.map(item => new Transaction(item)));
+		expect(component.transactions).toEqual(testTransactions);
 	}));
 
 	it('should create a new transaction', fakeAsync(() => {

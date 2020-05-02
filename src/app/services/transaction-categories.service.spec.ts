@@ -41,7 +41,7 @@ describe('TransactionCategoriesService', () => {
 			expect(expectedRes).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction_categories/?page=${page}`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction-categories/?page=${page}`);
 		expect(req.request.method).toEqual('GET');
 		req.flush({
 			items: CATEGORIES_TEST_DATA,
@@ -62,7 +62,7 @@ describe('TransactionCategoriesService', () => {
 			expect(expectedRes).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction_categories/`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction-categories/`);
 		expect(req.request.method).toEqual('POST');
 		req.flush({
 			item: CATEGORIES_TEST_DATA[0],
@@ -81,7 +81,7 @@ describe('TransactionCategoriesService', () => {
 			expect(expectedRes).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction_categories/${categoryId}/`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction-categories/${categoryId}/`);
 		expect(req.request.method).toEqual('GET');
 		req.flush(CATEGORIES_TEST_DATA[0]);
 		httpTestingController.verify();
@@ -97,7 +97,7 @@ describe('TransactionCategoriesService', () => {
 			expect(expectedRes).toEqual(res);
 		});
 
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction_categories/${categoryId}/`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction-categories/${categoryId}/`);
 		expect(req.request.method).toEqual('PUT');
 		req.flush(CATEGORIES_TEST_DATA[0]);
 		httpTestingController.verify();
@@ -107,7 +107,7 @@ describe('TransactionCategoriesService', () => {
 
 		let categoryId = 1;
 		service.delete(categoryId, 1).subscribe();
-		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction_categories/${categoryId}/?page=1`);
+		let req = httpTestingController.expectOne(`${environment.apiUrl}/user/transaction-categories/${categoryId}/?page=1`);
 		expect(req.request.method).toEqual('DELETE');
 		req.flush({
 			items: CATEGORIES_TEST_DATA,
