@@ -83,6 +83,14 @@ export class TransactionsComponent implements OnInit {
 
 				this.transactionsService.create(this.account.id, new Transaction(result)).subscribe(res => {
 
+					let transaction = res.item;
+					if (transaction.transType === TransType.INCOME) {
+
+						this.account.amount += transaction.amount;
+					} else {
+
+						this.account.amount -= transaction.amount;
+					}
 					if (this.page === 1) {
 
 						if (this.transactions.length === this.transactionsService.recordsPerPage) {
@@ -114,8 +122,19 @@ export class TransactionsComponent implements OnInit {
 			if (result) {
 
 				let transactionIndex = this.transactions.indexOf(transaction);
+				let newTransaction = new Transaction(result);
 
-				this.transactionsService.update(transaction.id, new Transaction(result)).subscribe(res => {
+				this.transactionsService.update(transaction.id, newTransaction).subscribe(res => {
+
+					if (transaction.transType === TransType.INCOME) {
+
+						this.account.amount -= transaction.amount;
+						this.account.amount += newTransaction.amount;
+					} else {
+
+						this.account.amount += transaction.amount;
+						this.account.amount -= newTransaction.amount;
+					}
 
 					this.transactions.splice(transactionIndex, 1, res);
 					this.dataSource = [...this.transactions];
@@ -137,6 +156,14 @@ export class TransactionsComponent implements OnInit {
 		this.dialogRef.afterClosed().subscribe(result => {
 
 			if (result) {
+
+				if (transaction.transType == TransType.EXPENSE) {
+
+					this.account.amount += transaction.amount;
+				} else {
+
+					this.account.amount -= transaction.amount;
+				}
 
 				this.transactionsService.delete(transaction.id, this.page).subscribe(res => {
 
